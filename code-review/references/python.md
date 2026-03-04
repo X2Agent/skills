@@ -1,6 +1,17 @@
 # Python 编码规范参考手册
 
-参考来源：PEP 8、PEP 257、PEP 484，Django/FastAPI/Flask 官方文档
+## 官方参考来源
+
+以下规范均直接源自官方权威文档，所有条目均可在原始文档中找到对应依据：
+
+| 规范领域 | 官方文档 URL |
+|----------|-------------|
+| PEP 8 — 代码风格指南 | <https://peps.python.org/pep-0008/> |
+| PEP 257 — 文档字符串约定 | <https://peps.python.org/pep-0257/> |
+| PEP 484 — 类型注解 | <https://peps.python.org/pep-0484/> |
+| Django 编码风格 | <https://docs.djangoproject.com/en/stable/internals/contributing/writing-code/coding-style/> |
+| FastAPI 文档 | <https://fastapi.tiangolo.com/> |
+| Flask 文档 | <https://flask.palletsprojects.com/> |
 
 ---
 

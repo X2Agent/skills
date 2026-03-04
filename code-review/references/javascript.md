@@ -1,6 +1,19 @@
 # JavaScript / TypeScript 编码规范参考手册
 
-参考来源：Airbnb JavaScript Style Guide、Google JavaScript Style Guide、TypeScript 官方规范，React/Vue/Angular/Express 官方文档
+## 官方参考来源
+
+以下规范均直接源自官方权威文档，所有条目均可在原始文档中找到对应依据：
+
+| 规范领域 | 官方文档 URL |
+|----------|-------------|
+| Airbnb JavaScript Style Guide | <https://github.com/airbnb/javascript> |
+| Google JavaScript Style Guide | <https://google.github.io/styleguide/jsguide.html> |
+| TypeScript 官方手册 | <https://www.typescriptlang.org/docs/handbook/> |
+| TypeScript 严格模式 | <https://www.typescriptlang.org/tsconfig#strict> |
+| React 官方文档 | <https://react.dev/> |
+| Vue.js 官方风格指南 | <https://vuejs.org/style-guide/> |
+| Angular 官方风格指南 | <https://angular.dev/style-guide> |
+| Node.js / Express 文档 | <https://expressjs.com/en/guide/routing.html> |
 
 ---
 

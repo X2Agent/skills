@@ -1,6 +1,16 @@
 # C# 编码规范参考手册
 
-参考来源：Microsoft C# 编码约定、.NET 设计准则、ASP.NET Core 文档
+## 官方参考来源
+
+以下规范均直接源自官方权威文档，所有条目均可在原始文档中找到对应依据：
+
+| 规范领域 | 官方文档 URL |
+|----------|-------------|
+| C# 编码约定 | <https://learn.microsoft.com/dotnet/csharp/fundamentals/coding-style/coding-conventions> |
+| .NET 命名准则 | <https://learn.microsoft.com/dotnet/standard/design-guidelines/naming-guidelines> |
+| .NET 框架设计准则 | <https://learn.microsoft.com/dotnet/standard/design-guidelines/> |
+| ASP.NET Core 文档 | <https://learn.microsoft.com/aspnet/core/> |
+| Entity Framework Core 文档 | <https://learn.microsoft.com/ef/core/> |
 
 ---
 

@@ -1,6 +1,17 @@
 # Golang 编码规范参考手册
 
-参考来源：Effective Go、Go Code Review Comments、Google Go Style Guide，Gin/Echo/GORM 官方文档
+## 官方参考来源
+
+以下规范均直接源自官方权威文档，所有条目均可在原始文档中找到对应依据：
+
+| 规范领域 | 官方文档 URL |
+|----------|-------------|
+| Effective Go | <https://go.dev/doc/effective_go> |
+| Go Code Review Comments | <https://go.dev/wiki/CodeReviewComments> |
+| Google Go Style Guide | <https://google.github.io/styleguide/go/> |
+| Gin 框架文档 | <https://gin-gonic.com/docs/> |
+| Echo 框架文档 | <https://echo.labstack.com/docs/> |
+| GORM 文档 | <https://gorm.io/docs/> |
 
 ---
 
