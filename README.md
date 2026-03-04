@@ -4,7 +4,7 @@ This repository contains Agent Skills for use with Claude and compatible AI agen
 
 ## Available Skills
 
-### [code-review](./skills/code-review/)
+### [code-review](./code-review/)
 
 代码规范审查技能（Code Standards Review Skill）
 

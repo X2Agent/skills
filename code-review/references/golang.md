@@ -1,0 +1,84 @@
+# Golang 编码规范参考手册
+
+参考来源：Effective Go、Go Code Review Comments、Google Go Style Guide，Gin/Echo/GORM 官方文档
+
+---
+
+## 命名规范
+
+- **包名**：全小写，简短，无下划线，例：`httputil`、`userservice`
+- **导出标识符（公有）**：PascalCase，例：`UserService`、`GetUserByID()`
+- **未导出标识符（私有）**：camelCase，例：`userCount`、`parseConfig()`
+- **接口名**：单方法接口以方法名加 `er` 结尾，例：`Reader`、`Writer`、`Stringer`
+- **常量**：PascalCase（导出）或 camelCase（未导出），不使用全大写加下划线
+- **错误变量**：以 `Err` 开头，例：`ErrNotFound`、`ErrInvalidInput`
+- **错误类型**：以 `Error` 结尾，例：`ValidationError`、`NotFoundError`
+- **缩写词**：统一大写或小写，例：`userID`（不是 `userId`）、`parseURL`（不是 `parseUrl`）
+- **Receiver 名称**：使用类型名的首字母缩写（1-2 个字符），全文件保持一致，例：`func (u *User) Save()`
+
+---
+
+## 代码格式规范
+
+- 必须使用 `gofmt` 格式化代码（Tab 缩进）
+- 导入分组：标准库 → 第三方库 → 本地包，各组用空行分隔
+- 使用 `goimports` 自动管理导入
+- 每行不超过 120 个字符（建议值）
+- 多个同类型变量使用组声明 `var (...)` 或 `const (...)`
+
+---
+
+## 注释规范
+
+- 导出的包、函数、类型、变量必须有文档注释
+- 注释以被注释的名称开头，例：`// UserService handles user operations.`
+- 包注释放在 `package` 语句之前，例：`// Package userservice provides...`
+- 注释使用完整句子，以句号结尾
+
+---
+
+## 错误处理规范
+
+- 错误必须被处理，不得用 `_` 忽略（除非有明确说明理由）
+- 错误信息使用小写，不以标点结尾，例：`"user not found"`（不是 `"User not found."`）
+- 自定义错误使用 `fmt.Errorf("...: %w", err)` 包装（Go 1.13+）
+- 不使用 `panic` 处理正常错误流程；`panic` 只用于不可恢复的程序错误
+- 返回错误时，其他返回值应为零值
+
+---
+
+## 代码组织规范
+
+- 接口应在使用方定义，而非实现方（Go 接口隐式实现原则）
+- 避免过深嵌套；提前返回错误（"happy path" 在最后）
+- 不导出内部实现细节
+- 测试文件以 `_test.go` 结尾，测试函数以 `Test` 开头
+
+---
+
+## Gin 框架规范
+
+- 路由定义按 HTTP 方法和功能模块分组
+- Handler 函数名以 `Handle` 开头或以功能命名，例：`HandleCreateUser()`、`GetUser()`
+- 使用 `c.ShouldBindJSON()` 或 `c.ShouldBind()` 绑定请求体（避免 `c.BindJSON()`，后者自动写入 400 响应头）
+- 响应使用 `c.JSON()`、`c.String()` 等方法，并显式传递 HTTP 状态码
+- 中间件函数名以 `Middleware` 结尾或以功能命名，例：`AuthMiddleware()`
+
+---
+
+## Echo 框架规范
+
+- Handler 函数签名：`func(c echo.Context) error`
+- 路由分组使用 `e.Group()` 按模块组织
+- 使用 `c.Bind()` 绑定请求，`c.Validate()` 验证
+- 错误返回使用 `echo.NewHTTPError(code, message)`
+
+---
+
+## GORM 规范
+
+- 模型结构体嵌入 `gorm.Model` 或手动声明主键
+- 表名约定：结构体名的蛇形复数（`User` → `users`）
+- 字段标签格式：`gorm:"column:user_name;type:varchar(100);not null"`
+- 检查操作结果，不忽略 `db.Error` 返回值
+- 软删除使用 `DeletedAt gorm.DeletedAt` 字段（已包含在 `gorm.Model` 中）
