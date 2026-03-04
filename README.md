@@ -2,6 +2,37 @@
 
 This repository contains Agent Skills for use with Claude and compatible AI agents.
 
+## Installation
+
+### Via OpenSkills (Claude Code, Cursor, Windsurf, Aider, and more)
+
+Install the skills from this repository using [openskills](https://github.com/numman-ali/openskills):
+
+```bash
+# Install into the current project
+npx openskills install X2Agent/skills
+
+# Register installed skills in AGENTS.md so your agent can see them
+npx openskills sync
+```
+
+To load a specific skill at runtime (agents run this automatically):
+
+```bash
+npx openskills read code-review
+```
+
+### Via Claude Code (native)
+
+Claude Code discovers skills automatically from `.claude/skills/`. You can also install manually:
+
+```bash
+mkdir -p .claude/skills
+cp -r code-review .claude/skills/
+```
+
+---
+
 ## Available Skills
 
 ### [code-review](./code-review/)
