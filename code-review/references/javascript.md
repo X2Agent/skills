@@ -56,7 +56,7 @@
 - 禁止使用 `any` 类型；必要时使用 `unknown` 并做类型收窄
 - 对象结构定义优先使用 `interface`；联合类型等复杂场景使用 `type`
 - 非空断言（`!`）需有充分理由，尽量通过类型收窄代替
-- 枚举优先使用 `const enum` 以减少运行时开销
+- 在仅限 TypeScript 的内部项目且未启用 `isolatedModules` 时，可考虑使用 `const enum` 以减少运行时开销；如需跨模块/包边界、使用 Babel / esbuild / Vite / SWC 等依赖 `isolatedModules` 的构建工具，或对外发布库，请遵循 TypeScript 官方建议避免使用 `const enum`，改用普通 `enum` 或字面量联合类型
 - 泛型名称使用单个大写字母（`T`、`U`）或描述性 PascalCase（`TKey`、`TValue`）
 
 ---
