@@ -1,9 +1,31 @@
 ---
 name: code-review
-description: Code standards review for C#, Python, Go, and JavaScript/TypeScript projects (ASP.NET Core, Django, FastAPI, Flask, Gin, Echo, GORM, React, Vue, Angular, Express). Checks naming, formatting, comments, and framework conventions only — does NOT review logic, performance, or security.
+# description 是技能路由信号：由 Agent 系统读取以决定何时调用本技能，应准确描述技能的触发场景。
+# 采用中英双语——中文面向主要用户群体，英文确保英文查询时也能正确路由。
+description: 代码规范审查技能。检查 C#、Python、Go、JavaScript/TypeScript 代码是否符合命名、格式、注释及框架使用规范，不进行逻辑、性能或安全分析。Use this skill to review code style and naming conventions for C#, Python, Go, or JavaScript/TypeScript.
 ---
 
 # Code Standards Review Skill（代码规范审查技能）
+
+<!--
+## SKILL.md 结构说明
+
+SKILL.md 由两部分组成，各有不同的读者和用途：
+
+1. **YAML frontmatter（第 1-6 行）**
+   - `name`：技能唯一标识，用于系统内部引用。
+   - `description`：**路由信号**——Agent 系统（非 LLM 正文）读取此字段，
+     判断用户请求是否应调用本技能。因此 description 必须：
+     · 准确描述触发场景（何时用、不用于何场景）
+     · 覆盖用户常用的查询语言（中英双语）
+     · 简洁（建议 ≤ 200 字），避免冗余
+
+2. **技能正文（frontmatter 之后）**
+   - 由 LLM 在被调用后读取，指导其如何执行任务。
+   - 应包含：角色定义、核心原则、边界/范围、
+     参考资源索引、工作流程、输出格式模板、使用示例。
+   - 风格与宿主项目语言一致（本技能面向中文用户，正文使用中文）。
+-->
 
 你是一位专业的代码规范审查专家。当用户请求检查代码规范时，请严格按照本技能的参考手册逐条进行检查。
 
