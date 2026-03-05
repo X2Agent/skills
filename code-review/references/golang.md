@@ -93,3 +93,45 @@
 - 字段标签格式：`gorm:"column:user_name;type:varchar(100);not null"`
 - 检查操作结果，不忽略 `db.Error` 返回值
 - 软删除使用 `DeletedAt gorm.DeletedAt` 字段（已包含在 `gorm.Model` 中）
+
+---
+
+## 并发与 Goroutine 规范
+
+- Goroutine 必须有明确的退出机制，禁止创建后无法停止的 goroutine（goroutine 泄漏）
+- 使用 `context.Context` 传递截止时间、取消信号和请求范围的值；函数第一个参数应为 `ctx context.Context`
+- 共享状态通过 channel 或 `sync.Mutex` 保护；优先使用 channel 而非共享内存
+- 使用 `sync.WaitGroup` 等待一组 goroutine 完成
+- `sync.Once` 用于只需执行一次的初始化逻辑
+
+---
+
+## defer 使用规范
+
+- `defer` 用于资源释放（关闭文件、解锁、关闭连接），紧跟资源获取语句之后
+- 循环体内避免使用 `defer`（每次迭代都会新增 defer，资源不会在循环内及时释放）
+- 注意 defer 中使用命名返回值可以修改函数的返回结果，需显式注释说明意图
+
+---
+
+## 测试规范
+
+- 优先使用**表驱动测试**（table-driven tests）组织多个用例：
+
+  ```go
+  tests := []struct {
+      name  string
+      input int
+      want  int
+  }{
+      {"positive", 1, 2},
+      {"zero", 0, 1},
+  }
+  for _, tt := range tests {
+      t.Run(tt.name, func(t *testing.T) { ... })
+  }
+  ```
+
+- 使用 `t.Run()` 创建子测试，便于单独运行和并行化
+- 测试辅助函数使用 `t.Helper()` 标记，使失败信息指向调用处而非辅助函数内部
+- 使用 `t.Parallel()` 启用可并行的测试用例

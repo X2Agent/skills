@@ -82,3 +82,25 @@
 - 实体类不应包含数据访问逻辑
 - 实体映射优先使用 Fluent API（`IEntityTypeConfiguration<T>`），而非 Data Annotations
 - 迁移文件名应描述变更内容，例：`AddUserEmailIndex`
+
+---
+
+## 异常处理规范
+
+- 抛出具体异常类型，而非基类 `Exception`，例：`throw new ArgumentNullException(nameof(param))`
+- 只捕获能处理的异常；避免空的 `catch` 块吞掉异常
+- 捕获范围从小到大排列（派生异常在基类异常之前）
+- 使用 `when` 过滤器限定捕获条件：`catch (HttpException ex) when (ex.StatusCode == 404)`
+- 不使用异常控制正常流程（例：不用 `try/catch` 代替 `TryParse` 检查）
+- 最终清理资源优先使用 `using` 声明而非 `try/finally`
+- 异常消息应包含足够的上下文信息，便于排查
+
+---
+
+## 模式匹配与现代 C# 特性规范
+
+- 优先使用模式匹配（`switch expression`、`is` 模式）代替冗长的 `if-else` 链
+- 使用 `record` 类型表示不可变数据传输对象（DTO）
+- 使用可空引用类型（Nullable Reference Types，`#nullable enable`）并消除所有警告
+- 使用 `init` 访问器创建初始化后不可变的属性
+- 条件性 `null` 合并赋值：`collection ??= new List<T>()`

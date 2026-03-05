@@ -108,3 +108,29 @@
 - 异步路由处理使用 `async`/`await`，并通过 try/catch 或 `next(err)` 传递错误
 - 环境变量通过 `process.env` 访问，使用 `dotenv` 加载本地配置
 - 路由处理器不直接操作数据库，应通过服务层（Service Layer）访问
+
+---
+
+## Async/Await 与 Promise 规范
+
+- 优先使用 `async/await`，而非链式 `.then()/.catch()`
+- `async` 函数必须处理所有可能的 rejection：使用 `try/catch` 包裹 `await` 或调用处捕获
+- 禁止使用 `await` 在循环中串行执行可以并发的操作；改用 `Promise.all()`：
+  ```ts
+  // 错误：串行等待
+  for (const id of ids) { await fetch(id); }
+  // 正确：并发执行
+  await Promise.all(ids.map(id => fetch(id)));
+  ```
+- 不混用 `async/await` 与 `new Promise()` 构造函数（除非封装回调 API）
+- 错误处理中的 `catch` 块应记录或重新抛出错误，不得为空
+
+---
+
+## 模块系统规范
+
+- 新项目统一使用 ES Modules（`import`/`export`），避免混用 CommonJS（`require`/`module.exports`）
+- 导出分为命名导出（`export const`）和默认导出（`export default`）；每个文件只有一个默认导出
+- 禁止循环依赖；使用 `barrel` 文件（`index.ts`）统一导出模块公共 API
+- 仅导入实际使用的符号，避免 `import * as`（除非有明确需要）
+- 路径别名（`@/`）在 `tsconfig.json` 或打包配置中统一声明

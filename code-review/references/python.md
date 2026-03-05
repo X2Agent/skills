@@ -93,3 +93,22 @@
 - 视图函数名称与路由路径语义一致
 - 配置使用类继承方式，例：`class ProductionConfig(Config):`
 - 使用 `current_app` 和 `g`，而非直接引用全局变量
+
+---
+
+## 异常处理规范
+
+- 捕获具体异常类型，禁止裸 `except:` 或 `except Exception:` 吞掉所有错误
+- 使用 `except SpecificError as e:` 并记录或重新抛出，保留原始上下文：`raise NewError("msg") from e`
+- 不使用异常控制正常流程（例：不用 `try/except` 代替 `if key in dict`）
+- 自定义异常继承自适当的内置异常基类，例：`class ValidationError(ValueError): ...`
+- 异常类名以 `Error` 结尾，例：`UserNotFoundError`
+- 使用 `contextlib.suppress(SpecificError)` 代替仅含 `pass` 的 `except` 块
+
+---
+
+## 上下文管理器与资源管理规范
+
+- 资源管理（文件、网络连接、锁等）必须使用 `with` 语句
+- 自定义上下文管理器优先使用 `@contextlib.contextmanager` 装饰器
+- 实现 `__enter__` / `__exit__` 时，`__exit__` 的返回值仅在确实要抑制异常时返回 `True`
