@@ -90,7 +90,7 @@
 - 抛出具体异常类型，而非基类 `Exception`，例：`throw new ArgumentNullException(nameof(param))`
 - 只捕获能处理的异常；避免空的 `catch` 块吞掉异常
 - 捕获范围从小到大排列（派生异常在基类异常之前）
-- 使用 `when` 过滤器限定捕获条件：`catch (HttpException ex) when (ex.StatusCode == 404)`
+- 使用 `when` 过滤器限定捕获条件：`catch (HttpRequestException ex) when (ex.StatusCode == HttpStatusCode.NotFound)`
 - 不使用异常控制正常流程（例：不用 `try/catch` 代替 `TryParse` 检查）
 - 最终清理资源优先使用 `using` 声明而非 `try/finally`
 - 异常消息应包含足够的上下文信息，便于排查
