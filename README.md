@@ -28,7 +28,9 @@ Claude Code discovers skills automatically from `.claude/skills/`. You can also 
 
 ```bash
 mkdir -p .claude/skills
+# Copy the skill(s) you want — the same pattern applies to all skills in this repo
 cp -r code-review .claude/skills/
+cp -r spec-driven-development .claude/skills/
 ```
 
 ---
