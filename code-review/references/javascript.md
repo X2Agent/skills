@@ -81,7 +81,9 @@
 - `<template>`、`<script>`、`<style>` 块顺序保持一致（推荐此顺序）
 - Vue 3 中 Composition API 优先于 Options API
 - Props 定义使用对象形式，指定类型和是否必须
-- Emit 事件名使用 camelCase，在模板中使用 kebab-case
+- Emit 事件名：
+  - Vue 3 Composition API（含 `<script setup>`）：在 `defineEmits` 和模板监听中统一使用 camelCase（模板编译器会自动处理 camelCase / kebab-case 转换）
+  - Vue 2 / Vue 3 Options API：在脚本中使用 camelCase，在模板中使用 kebab-case
 - `v-for` 必须配合 `:key`，且不使用数组索引作为 key
 - `v-if` 和 `v-for` 不在同一元素上使用
 
