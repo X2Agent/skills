@@ -48,6 +48,20 @@ Performs code standards and style convention checks for **C#**, **Python**, **Go
 
 > **Note**: This skill performs coding standards checks only. It does **not** perform code logic review, performance analysis, or security audits.
 
+### [spec-driven-development](./spec-driven-development/)
+
+规范驱动开发技能（Spec-Driven Development Skill）
+
+Guides developers from vibe-coding to structured Agentic Coding: write a spec first, get it reviewed, then implement with TDD.
+
+- **Requirement Dialogue**: clarifies goals, users, boundaries, and success criteria before writing anything
+- **Spec Document**: produces a structured spec with interface contracts, Given/When/Then behaviour items, error handling, and Out of Scope
+- **Hard Gate**: no implementation code until the spec is confirmed by the user
+- **TDD Loop**: for each spec item, strictly RED → GREEN → REFACTOR → COMMIT
+- **Acceptance Verification**: every spec item has a passing automated test before the feature is considered done
+
+> **Note**: Use this skill at the start of any new feature, module, or significant change — spec first, code second.
+
 ## Skill Format
 
 Each skill is a folder containing a `SKILL.md` file with YAML frontmatter and markdown instructions:
