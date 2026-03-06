@@ -22,17 +22,6 @@ To load a specific skill at runtime (agents run this automatically):
 npx openskills read code-review
 ```
 
-### Via Claude Code (native)
-
-Claude Code discovers skills automatically from `.claude/skills/`. You can also install manually:
-
-```bash
-mkdir -p .claude/skills
-# Copy the skill(s) you want — the same pattern applies to all skills in this repo
-cp -r code-review .claude/skills/
-cp -r spec-driven-development .claude/skills/
-```
-
 ---
 
 ## Available Skills
