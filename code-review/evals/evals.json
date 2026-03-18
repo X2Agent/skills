@@ -1,0 +1,61 @@
+{
+    "skill_name": "code-review",
+    "evals": [
+        {
+            "id": 1,
+            "name": "vibe-coding-python-quick-mode",
+            "prompt": "AI 帮我写了这段 Python，快速看看有没有硬伤：\n\n```python\ndef get_user_data(id):\n    db = connect_database()\n    result = db.query('SELECT * FROM users WHERE id = ' + str(id))\n    user_data = result[0]\n    # get the user data\n    print('got user data')\n    return user_data\n```",
+            "expected_output": "快速模式报告，识别关键问题：SQL 拼接（P1）、变量命名 id 遮蔽内建（P2）、冗余注释（P3）、print 调试语句残留（P2），并给出可直接粘贴的修正代码片段。",
+            "assertions": [
+                {
+                    "name": "识别快速模式",
+                    "check": "报告应为快速模式（只报 P1 + 高优先 P2），不展开所有 P3 细节"
+                },
+                {
+                    "name": "AI 代码高频陷阱检测",
+                    "check": "报告中应识别至少两类 AI 生成代码陷阱：冗余注释（# get the user data）和调试代码残留（print 语句），并标注为 P2 违规"
+                },
+                {
+                    "name": "给出修正代码",
+                    "check": "每个 P1/P2 问题应附带可直接粘贴的修正代码片段，而非只描述问题"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "typescript-react-deep-review",
+            "prompt": "对整个组件做全量代码规范审查：\n\n```tsx\nconst UserCard = ({ userData, onClick }: any) => {\n  const [isLoading, setIsLoading] = useState(false)\n  var errorMessage = ''\n\n  const handleclick = () => {\n    setIsLoading(true)\n    onClick(userData)\n    setIsLoading(false)\n  }\n\n  return (\n    <div className=\"user-card\" onClick={handleclick}>\n      <p>{userData.name}</p>\n    </div>\n  )\n}\n```",
+            "expected_output": "深度模式报告，识别：any 类型（P1）、var 使用（P1）、handleclick 命名不符合 camelCase（P1 实际按 onClick 应为 handleClick）、Props 没有类型定义（P1）、isLoading 状态逻辑有问题（但技能不审查逻辑）、缺少 key prop 等。",
+            "assertions": [
+                {
+                    "name": "深度模式输出",
+                    "check": "报告应为完整深度模式，包含 P1/P2/P3 三个等级的所有问题"
+                },
+                {
+                    "name": "any 类型识别",
+                    "check": "应将 any 类型注解标记为 P1 违规"
+                },
+                {
+                    "name": "命名规范检查",
+                    "check": "应识别 handleclick 不符合 React 事件处理函数 camelCase 命名规范"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "unsupported-language-graceful-failure",
+            "prompt": "帮我检查这段 Rust 代码的规范：\n\n```rust\nfn calculate_sum(numbers: Vec<i32>) -> i32 {\n    let mut sum = 0;\n    for n in numbers { sum += n; }\n    sum\n}\n```",
+            "expected_output": "礼貌告知用户 Rust 当前不在支持范围内，列出支持的语言，并建议可以做什么（例如提建议扩展）。",
+            "assertions": [
+                {
+                    "name": "正确拒绝不支持语言",
+                    "check": "不应尝试对 Rust 代码进行规范审查，应明确说明不支持"
+                },
+                {
+                    "name": "给出支持语言列表",
+                    "check": "应列出 C#、Python、Go、JavaScript/TypeScript 支持列表"
+                }
+            ]
+        }
+    ]
+}
